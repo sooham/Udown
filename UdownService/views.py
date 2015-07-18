@@ -38,4 +38,6 @@ def register(request):
 
 def signup_success(request):
     return render_to_response('registration/signup_success.html')
+def invite(request):
+    return render_to_response('invite.html');
 
