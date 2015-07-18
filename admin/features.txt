@@ -1,12 +1,12 @@
 1. Create signup and sign in system - Frank  Stage 1: Done 
-2. Integrate payment system with braintree - James
+2. Integrate payment system with braintree - James Stage 1: Done
 3. Google Maps Display location, find people around them who are currently using the app, update location on login - Sooham 
 4. Invite people by selecting users and creating study groups - Sooham
 5. (Part of 4) create/edit start and end times. - Sooham
 6. Notify when the event will start - through the app - Shrey 
 7. Notify when the event will start - through twilio - Shrey
-8. Notify when the person gets an invite - Shrey
-9. Students have ability to hire TAs/upper years through study groups - Frank
+8. Notify when the person gets an invite - Shrey 
+9. Students have ability to hire TAs/upper years through study groups - Frank 
 10. TAs should also get notifications through twilio - Shrey
 11. Upload documents - Frank
 12. rating TAs - ??
