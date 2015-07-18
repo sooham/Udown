@@ -1,0 +1,5 @@
+django==1.7.3
+django-tastypie==0.12.1
+django-suit==0.2.13
+requests
+django-oauth-toolkit==0.8.1
