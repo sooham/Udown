@@ -3,14 +3,14 @@ from tastypie_user.models import MyUser as User
 # Create your models here.
 
 class StudyGroup(models.Model):
-	users = models.ManyToManyField(User)
+	users = models.ManyToManyField(User, through='Membership')
 	description = models.CharField(max_length = 140)
 
-# class Membership(models.Model):
-#     person = models.ForeignKey(User)
-#     group = models.ForeignKey(StudyGroup)
-#     # date_joined = models.DateField()
-#     # invite_reason = models.CharField(max_length=64)
+class Membership(models.Model):
+    person = models.ForeignKey(User)
+    group = models.ForeignKey(StudyGroup)
+    # date_joined = models.DateField()
+    # invite_reason = models.CharField(max_length=64)
 
 from tastypie.resources import ModelResource
 from tastypie import fields, http
