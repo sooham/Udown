@@ -1,9 +1,0 @@
-<html>
-<head>
-	<title>Sign up succeed</title>
-</head>
-<body>
-<h1>Congratulations!</h1>
-now you can <td><a href="/accounts/login/">Login</a></td>
-</body>
-</html>

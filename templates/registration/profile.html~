@@ -1,6 +1,0 @@
-<html>
-<body>
-Hi! {{ username }}
-<td><a href="/pnf/">Go back to news feed</a></td>
-</body>
-</html>
