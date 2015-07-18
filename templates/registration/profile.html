@@ -1,6 +1,14 @@
 <html>
 <body>
 <p>Hi! {{ username }}</p>
-<td><a href="/pnf/">Go back to news feed</a></td>
+<p>Here should be the noti</p>
+
+{% load notifications_tags %}
+
+{% notifications_unread as unread_count %}
+<p></p>
+{% if unread_count %}
+    You have <strong>{{ unread_count }}</strong> unread notifications.
+{% endif %}
 </body>
 </html>

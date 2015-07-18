@@ -22,7 +22,7 @@ def logout_view(request):
     return HttpResponseRedirect("/pnf/")
 
 def profile(request):
-     return render_to_response('registration/profile.html', {'username':request.user.username})
+    return render_to_response('registration/profile.html', {'username':request.user.username, 'user':request.user})
 
 def register(request):
     if request.method == 'POST':
@@ -38,6 +38,9 @@ def register(request):
 
 def signup_success(request):
     return render_to_response('registration/signup_success.html')
+<<<<<<< HEAD
 def invite(request):
     return render_to_response('invite.html');
 
+=======
+>>>>>>> 6a5c61a4018685548cadb2db6515d7bd1abe3fc8

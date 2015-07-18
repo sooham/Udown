@@ -77,3 +77,6 @@ celerybeat.pid
 celerybeat-schedule
 celerybeat-schedule.db
 dump.rdb
+
+# Html cache
+*~

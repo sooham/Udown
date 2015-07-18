@@ -38,6 +38,7 @@ INSTALLED_APPS = (
     'django.contrib.staticfiles',
     'oauth2_provider',
     'tastypie_user',
+    'notifications',
 )
 
 MIDDLEWARE_CLASSES = (
