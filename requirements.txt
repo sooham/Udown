@@ -1,4 +1,4 @@
-django==1.7.3
+django==1.7.1
 django-tastypie==0.12.1
 django-suit==0.2.13
 requests
