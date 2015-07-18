@@ -4,3 +4,4 @@ django-suit==0.2.13
 requests
 django-oauth-toolkit==0.8.1
 braintree
+django-notifications-hq
