@@ -1,0 +1,45 @@
+<html>
+<head>
+	<title>Post</title>
+</head>
+<body>
+    {% if user.username %}
+	<h1>Post</h1>
+	<h2>Hello {{ user.username }}!</h2>
+
+
+	{% if form.errors %}
+		<p style="color: red;">
+			please correct the error{{ form.error|pluralize }} below.
+        </p>
+	{% endif %}
+
+	<form action="" method="post">{% csrf_token %}
+		<table>
+			{{ form.as_table }}
+		</table>
+		<input type="submit" value="SuBmIt!">
+	</form>
+
+	<td><a href="/accounts/logout/">Logout</a></td>
+
+	{% endif %}
+
+	{% if not user.username %}
+
+	<p>not logged in</p>
+	<td><a href="/accounts/login/">Login</a></td>
+
+    {% endif %}	
+
+
+	<p>
+	News Feed:
+	</p>
+	{% for post in posts %}
+	<p>
+	{{ post.author }}:{{ post.content }} at {{ post.time_posted }}
+	<p>
+	{% endfor %}
+</body>
+</html>

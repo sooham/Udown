@@ -8,6 +8,7 @@ from tastypie_user.models import MyUser as User
 from django.contrib import auth
 from django.conf import settings
 from django.http import HttpResponse
+from tastypie import http
 
 class UserResource(ModelResource):
 
@@ -37,10 +38,13 @@ class UserResource(ModelResource):
 			username = bundle.data.pop('username')
 			password1 = bundle.data.pop('password1')
 			password2 = bundle.data.pop('password2')
+			email = bundle.data.pop('email')
 
 			if (password1 == password2):
-				new_user = User(username = username, password = password1)
+				new_user = User.create_user(username, email, password1)
 				new_user.save()
+				bundle.obj = new_user
+				raise ImmediateHttpResponse(http.HttpAccepted())
 			else:			
 				raise BadRequest('signup error: password did not match')
 			# form = USER_CREATION_FORM(bundle.data)
@@ -54,7 +58,6 @@ class UserResource(ModelResource):
 			# 	#output the errors for tatstypie
 			# 	bundle.errors[self._meta.resource_name] = form.errors
 			# 	raise ImmediateHttpResponse(self.error_response(request, bundle.errors))
-
 
 		elif create_type == 'login':
 			expiry_seconds = bundle.data.pop('expiry_seconds', None)

@@ -1,0 +1,9 @@
+<html>
+	<body>
+Hi! This is {{ user_name }}'s blog!<p>
+my blogs:
+{% for blog in blogs %}
+	<li>{{ forloop.counter }}. {{ blog.name}}</li>
+{% endfor %}
+	</body>
+</html>

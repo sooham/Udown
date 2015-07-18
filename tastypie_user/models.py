@@ -5,5 +5,6 @@ from django.db import models
 
 
 class MyUser(User):
-    class Meta:
-        proxy = True
+
+	class Meta:
+		proxy = True

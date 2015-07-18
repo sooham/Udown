@@ -1,0 +1,5 @@
+<html>
+	<body>
+	News Feed:<p>
+	{% for blog in blogs %}
+	{

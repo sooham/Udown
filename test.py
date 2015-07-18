@@ -9,9 +9,21 @@ def signup(name, password):
 			'username': name,
 			'password1': password,
 			'password2': password,
-			#'email': 'jq.yang@berkeley.edu',
-			#'more_fields': 'your value'
 		}
+	return requests.post(
+		url,
+		data=json.dumps(payload),
+		headers=headers
+	)
+
+def login(name, email, password):
+	headers = {'content-type': 'application/json'}
+	payload = {
+		'type': 'login',
+		'username': name,
+		'email': email,
+		'password': password,
+	}
 	return requests.post(
 		url,
 		data=json.dumps(payload),

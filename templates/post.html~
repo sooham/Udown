@@ -1,0 +1,14 @@
+<html>
+<head>
+	<title>Post
+</head>
+<body>
+	<h1>username<h1>
+	<form action='.' method='POST'>
+		<table>
+			{{ post.author }}
+		</table>
+		<p><input type="submit" value="Submit"></p>
+	</form>
+</body>
+</html>

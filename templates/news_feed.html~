@@ -1,0 +1,8 @@
+<html>
+	<body>
+	News Feed:<p>
+	{% for post in posts %}
+	{{ post.author }}:{{ post.content }} at {{ post.time_posted }}
+	{% endfor %}
+	<body>
+<html>
