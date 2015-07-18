@@ -1,4 +1,4 @@
-1. Create signup and sign in system - Frank
+1. Create signup and sign in system - Frank  Stage 1: Done 
 2. Integrate payment system with braintree - James
 3. Google Maps Display location, find people around them who are currently using the app, update location on login - Sooham 
 4. Invite people by selecting users and creating study groups - Sooham
@@ -10,5 +10,4 @@
 10. TAs should also get notifications through twilio - Shrey
 11. Upload documents - Frank
 12. rating TAs - ??
-
-
+13. Notifications - Frank Stage 1: Done
