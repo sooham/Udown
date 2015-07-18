@@ -41,3 +41,6 @@ def signup_success(request):
 
 def invite(request):
     return render_to_response('invite.html');
+
+def home(request):
+    return render_to_response('index.html');

@@ -1,8 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from tastypie.api import Api
-from views import profile, register
-from views import profile
+from views import profile, register, home
 from django.contrib.auth.views import login, logout
 from tastypie_user.resources import UserResource
 import notifications
@@ -21,8 +20,9 @@ urlpatterns = patterns('',
     (r'^accounts/profile/$', profile),
     (r'^accounts/register/$', register),
 
-    url(r'^inbox/notifications/', include(notifications.urls)),
+    (r'', home),
 
-    url(r'^api/', include(v1_api.urls)),
-    url(r'^admin/', include(admin.site.urls)),
+    #(r'^inbox/notifications/', include(notifications.urls)),
+    (r'^api/', include(v1_api.urls)),
+    (r'^admin/', include(admin.site.urls)),
 )
