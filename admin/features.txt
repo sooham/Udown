@@ -1,0 +1,13 @@
+1. Create signup and sign in system
+2. Integrate payment system with braintree 
+3. Google Maps Display location, find people around them who are currently using the app, update location on login
+4. Invite people by selecting users and creating study groups
+5. create/edit start and end times. 
+6. Notify when the event will start - through the app 
+7. Notify when the event will start - through twilio
+8. Notify when the person gets an invite
+9. Students have ability to hire TAs/upper years through study groups
+10. TAs should also get notifications through twilio
+11. Upload documents
+
+
