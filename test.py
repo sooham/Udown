@@ -2,11 +2,12 @@ import requests, json
 
 url = 'http://localhost:8000/api/v1/user/'
 
-def signup(name, password):
+def signup(name, email, password):
 	headers = {'content-type': 'application/json'}
 	payload = {
 			'type': 'register',
 			'username': name,
+			'email': email,
 			'password1': password,
 			'password2': password,
 		}
@@ -16,12 +17,11 @@ def signup(name, password):
 		headers=headers
 	)
 
-def login(name, email, password):
+def login(name, password):
 	headers = {'content-type': 'application/json'}
 	payload = {
 		'type': 'login',
 		'username': name,
-		'email': email,
 		'password': password,
 	}
 	return requests.post(
