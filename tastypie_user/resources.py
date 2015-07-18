@@ -1,5 +1,5 @@
 try:
-    import json
+	import json
 except ImportError:
 	from django.utils import simplejson as json
 from tastypie.resources import ModelResource
@@ -25,13 +25,38 @@ class UserResource(ModelResource):
 		else:
 			raise BadRequest('not login')
 
-	def obj_get_list(self, request=None, **kwargs):
-		raise BadRequest('not allowed')
+	# def obj_get_list(self, request=None, **kwargs):
+	# 	raise BadRequest('not allowed')
 
 	def obj_create(self, bundle, **kwargs):
 		request = bundle.request
 		create_type = bundle.data.pop('type')
-		if create_type == 'login':
+
+		if create_type == 'register':
+
+			username = bundle.data.pop('username')
+			password1 = bundle.data.pop('password1')
+			password2 = bundle.data.pop('password2')
+
+			if (password1 == password2):
+				new_user = User(username = username, password = password1)
+				new_user.save()
+			else:			
+				raise BadRequest('signup error: password did not match')
+			# form = USER_CREATION_FORM(bundle.data)
+			# if form.is_valid():
+			# 	new_user = form.save()
+			# 	new_user.send_email('activate')
+			# 	bundle.obj = new_user
+			# 	raise ImmediateHttpResponse(http.HttpAccepted())
+			# 	#auto login, means request twice, first register, then login!
+			# else:
+			# 	#output the errors for tatstypie
+			# 	bundle.errors[self._meta.resource_name] = form.errors
+			# 	raise ImmediateHttpResponse(self.error_response(request, bundle.errors))
+
+
+		elif create_type == 'login':
 			expiry_seconds = bundle.data.pop('expiry_seconds', None)
 			user = auth.authenticate(**bundle.data)
 
