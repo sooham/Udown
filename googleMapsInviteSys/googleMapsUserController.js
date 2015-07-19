@@ -59,7 +59,13 @@ function addMarker(map, user) {
 
     // add click listener
     google.maps.event.addListener(marker, 'click', function() {
-      infowindow.open(map, marker);
+      if (currentInfoWindow) {currentInfoWindow.close()};
+      if (currentInfoWindow !== infowindow) {
+        currentInfoWindow = infowindow;
+        infowindow.open(map, marker);
+      } else {
+        currentInfoWindow = null;
+      }
     });
   }, 20);
 }
@@ -86,6 +92,9 @@ function initialize(userArray) {
 
 }
 
+var currentInfoWindow = null;
+
+// ---- generate some random users to test ----
 var names = ['bill gates', 'steve jobs', 'mark zuckerberg', 'drew houston',
             'satya nadella', 'bob jones'];
 
