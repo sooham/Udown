@@ -14,9 +14,22 @@ function showWorld(map) {
 function geolocateUser(map) {
   /* Centres map to user's geolocation and sets a marker, if the user
    * rejects user location request, then zooms out to world view
+   * also sends a POST request with the user's longitude and latitude
+   * to the server
    */
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition(function(position) {
+      // send a POST request to server
+      $.ajax({
+        type: "POST",
+        url: "http://localhost:8000/api/v1/study_group/",
+        data: {'type': 'set_gis', 'longitude': position.coords.longitude,
+               'latitude': position.coords.latitude},
+        params: {'oauth_consumer_key': 'abcd'},         // oauth consumer key has filler
+        success: function() {},
+        dataType: 'application/json'
+      });
+
       var pos = new google.maps.LatLng(position.coords.latitude,
                                    position.coords.longitude);
       map.setCenter(pos);
