@@ -48,7 +48,7 @@ function addMarker(map, user) {
    */
   setTimeout(function() {
     // add marker for user
-    if(user.position == {lat: 0, lng: 0}) {
+    if (user.position == {lat: 0, lng: 0}) {
       return;
     }
     var marker = new google.maps.Marker({
@@ -82,6 +82,26 @@ function addMarker(map, user) {
   }, 500);
 }
 
+function getUsersFromServer(userArray) {
+  /* Gets the information for every user from the server and adds their user
+   * objects to the array userArray
+   */
+  $.ajax({
+    url: 'localhost:8000/api/v1/user/',
+    data: function(data) {
+      // parse the data and add it to the userArray
+      userArray = JSON.parse(data).objects;
+    },
+    dataType: 'json'
+  });
+
+  // for all user objects we need to update a bit
+  userArray.forEach(function(userObj) {
+    usrObj.position = {lat: usrObj.latitude, lng: usrObj.lng};
+    usrObj.realname = usrObj.first_name + usrObj.last_name;
+  });
+}
+
 function initialize(userArray) {
   /* Initializes google Map object in DOM with ID 'map-canvas'
    * centred at the users location. For the map to show locally, the
@@ -109,23 +129,5 @@ var users = [];
 // To use, add UserObjects to the users array above this line,
 // then everything else will work itself
 
-// --- REMOVE BEFORE USING THIS FILE!!!!!!!!!----
-var names = ['bill gates', 'steve jobs', 'mark zuckerberg', 'drew houston',
-            'satya nadella', 'bob jones'];
-var usernames = ['haxx0r', 'noob', 'deathshot', 'captain', 'morganstanley',
-'1337', 'thelord', 'urmom'];
-
-for (var i = 0; i < 100; i++) {
-  var name = names[Math.floor(Math.random() * names.length)];
-  var usrname = usernames[Math.floor(Math.random() * usernames.length)];
-  var usrObj = {
-    realname: name,
-    username: usrname,
-    position: {lat: (2 * Math.random() - 1) * 90, lng: (2 * Math.random() - 1) * 180}
-  }
-  users.push(usrObj);
-}
-// --- UNTIL HERE !!!!!!!----
-
-
+getUsersFromServer(users);
 google.maps.event.addDomListener(window, 'load', function() {initialize(users);});
