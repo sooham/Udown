@@ -16,6 +16,9 @@ from tastypie.authentication import Authentication
 from oauth2_provider import oauth2_validators
 
 class StudyGroup(models.Model):
+	name = models.CharField(max_length = 80)
+	subject = models.CharField(max_length = 80)
+	ta = models.CharField(max_length = 90)
 	users = models.ManyToManyField(User, through='Membership')
 	description = models.CharField(max_length = 140)
 
