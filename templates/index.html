@@ -60,7 +60,10 @@
 		{% include "registration/login.html" %}
 
 		<h1>Register</h1>
-		{% include "registration/register.html" %}
+		<form action="" method="post"> {% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Create the account">
+		</form>
 	</div>
 
 	</body>

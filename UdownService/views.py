@@ -16,11 +16,6 @@ def login_view(request):
     else:
         return HttpResponseRedirect('/account/invalid/')
 
-def logout_view(request):
-    auth.logout(request)
-    # Redirect to a success page.
-    return HttpResponseRedirect("/pnf/")
-
 def profile(request):
     return render_to_response('registration/profile.html', {'username':request.user.username, 'user':request.user})
 
@@ -43,4 +38,13 @@ def invite(request):
     return render_to_response('invite.html');
 
 def home(request):
-    return render_to_response('index.html');
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            new_user = form.save()
+            return HttpResponseRedirect('/accounts/profile/')
+    else:
+        form = UserCreationForm()
+    return render_to_response('index.html', {
+        'form': form,
+    }, RequestContext(request))
