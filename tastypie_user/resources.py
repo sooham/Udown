@@ -87,7 +87,18 @@ class UserResource(ModelResource):
 		else:
 			return super(UserResource, self).get_detail(request, **kwargs)
 
+<<<<<<< HEAD
 	def dehydrate(self, bundle):
+=======
+	def push_notification(self, notification):
+		request = bundle.request
+		to = bundle.data.get('to_username')
+		to_user = MyUser.objects.get(username=to)
+		user = request.user
+		notify.send(user, recipient=, verb=notification)
+   	
+   	def dehydrate(self, bundle):
+>>>>>>> babe0a9a31dbd7e12b0178f97b4fb6b1582981b7
 		bundle.data['email'] = ''
 		bundle.data['password'] = ''
 		return bundle

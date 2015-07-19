@@ -1,6 +1,6 @@
 /*
  * This script contains all functions needed to parse an array of User objects,
- * a JS  object literal with
+ * which is a JS object literal with
  * {username: string, realname: string, location: {lat: number, lng: number}}
  */
 
@@ -26,8 +26,7 @@ function geolocateUser(map) {
         title:'You',
         map: map,
         position: pos,
-        animation: google.maps.Animation.DROP,
-        icon: 'http://maps.google.com/mapfiles/ms/icons/blue-dot.png'
+        animation: google.maps.Animation.DROP
       });
 
     }, function() {
@@ -36,6 +35,9 @@ function geolocateUser(map) {
     });
   } else {
     // browser does not support geolocation in this case show world view of map
+    alert('This browser does not support geolocation. ' +
+          'To provide you better study partners we suggest you update' +
+          'your browser');
     showWorld(map);
   }
 }
@@ -50,11 +52,18 @@ function addMarker(map, user) {
       title: user.realname,
       map: map,
       position: user.position,
-      animation: google.maps.Animation.DROP
+      animation: google.maps.Animation.DROP,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/green-dot.png'
     });
     // add info window
+    var userContent = '<div class="infowindow">' +
+                        '<center><h4>' + user.realname +
+                        ' (' + user.username + ')' + '</h4>' +
+                        '<br><a href="#"">Invite</a></center>' +
+                      '</div>';
     var infowindow = new google.maps.InfoWindow({
-      content: user.realname
+      content: userContent,
+      minWidth: 200
     });
 
     // add click listener
@@ -67,7 +76,7 @@ function addMarker(map, user) {
         currentInfoWindow = null;
       }
     });
-  }, 20);
+  }, 500);
 }
 
 function initialize(userArray) {
@@ -93,20 +102,27 @@ function initialize(userArray) {
 }
 
 var currentInfoWindow = null;
+var users = [];
+// To use, add UserObjects to the users array above this line,
+// then everything else will work itself
 
-// ---- generate some random users to test ----
+// --- REMOVE BEFORE USING THIS FILE!!!!!!!!!----
 var names = ['bill gates', 'steve jobs', 'mark zuckerberg', 'drew houston',
             'satya nadella', 'bob jones'];
+var usernames = ['haxx0r', 'noob', 'deathshot', 'captain', 'morganstanley',
+'1337', 'thelord', 'urmom'];
 
-var users = [];
 for (var i = 0; i < 100; i++) {
   var name = names[Math.floor(Math.random() * names.length)];
+  var usrname = usernames[Math.floor(Math.random() * usernames.length)];
   var usrObj = {
     realname: name,
-    position: {lat: (2 * Math.random() - 1) * 90, lng: (2 * Math.random() - 1) * 180},
-    username: 'haxx0r'
+    username: usrname,
+    position: {lat: (2 * Math.random() - 1) * 90, lng: (2 * Math.random() - 1) * 180}
   }
   users.push(usrObj);
 }
+// --- UNTIL HERE !!!!!!!----
+
 
 google.maps.event.addDomListener(window, 'load', function() {initialize(users);});
