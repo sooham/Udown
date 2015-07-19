@@ -65,3 +65,24 @@ def create_group(token):
 				'description': "LOL",
 			})
 	)
+
+def delete_group(token, id):
+	headers = {'content-type': 'application/json'}
+	if token != None:
+		data = {
+			'oauth_consumer_key': token,
+		}
+	else:
+		data = None
+	return requests.post(
+		url="http://localhost:8000/api/v1/study_group/",
+		headers=headers,
+		params=data,
+		data=json.dumps({
+				'type': "delete",
+				'id': id,
+			})
+	)
+
+t = get_token('a', '1234')
+token = eval(t.content)['access_token']
