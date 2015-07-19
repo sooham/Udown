@@ -1,0 +1,179 @@
+<html>
+	<head>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+		
+		<link rel="stylesheet" href="css/style.css">
+		
+	</head>
+	<body>
+		<nav class="navbar navbar-default">
+		<div class="container-fluid">
+		<!-- Brand and toggle get grouped for better mobile display -->
+		<div class="navbar-header">
+		  <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+		    <span class="sr-only">Toggle navigation</span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		    <span class="icon-bar"></span>
+		  </button>
+		  <a class="navbar-brand" href="index.html">Udown</a>
+		</div>
+
+		<!-- Collect the nav links, forms, and other content for toggling -->
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+		  <ul class="nav navbar-nav">
+		    <li><a href="find.html">Find a study group</a></li>
+		    <li class="dropdown">
+		      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Study Groups <span class="caret"></span></a>
+		      <ul class="dropdown-menu">
+			<li><a href="#">Populate study groups here</a></li>
+		    </ul>
+		    </li>
+		    <li class="dropdown">
+		      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My account <span class="caret"></span></a>
+		      <ul class="dropdown-menu">
+			<li><a href="profile.html">My profile</a></li>
+			  <li><a href="editprofile.html">Edit profile</a></li>
+			  <li><a href="editcreditcard.html">Edit credit card information </a></li>
+		    </ul>
+		    </li>
+		  </ul>
+		<p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p>
+		</div><!-- /.navbar-collapse -->
+		</div><!-- /.container-fluid -->
+		</nav>
+		<div class="container">
+			<h1 class="text-center">Welcome to Udown </h1>
+			<p>Developed by Shreyansh Kumar, Sooham Rafiz, Frank Niu and James Luo</p>
+			<h2>Login or Register as a new user!</h2>
+			<div class="panel panel-default" id="login-form">
+				<div class="panel-heading"><h1 class="text-center">Login</h1></div>
+				<div class="panel-body">
+					<form>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="username">Username</label>
+							</div>
+							<div class="col-md-6">
+								<input class="form-control username" type="text" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="password">Password</label>
+							</div>
+							<div class="col-md-6">
+								<input class="form-control password" type="password" />
+							</div>
+						</div>
+						<div class="text-right control-btn">
+							<a id="login" class="btn btn-default">Login</a>
+						</div>
+					</form>
+				</div>
+				<div class="errormsg"></div>
+			</div>
+			<div class="panel panel-default" id="register-form">
+				<div class="panel-heading">
+					<h1 class="text-center">Register</h1>
+				</div>
+				<div class="panel-body">
+					<form>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="firstname">First Name</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control first" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="number">Last Name</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control last" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="username">Username</label>
+							</div>
+							<div class="col-md-6">
+								<input class="form-control username" type="text" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="password">Password</label>
+							</div>
+							<div class="col-md-6">
+								<input class="form-control password" type="password" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="confirm">Confirm Password</label>
+							</div>
+							<div class="col-md-6">
+								<input class="form-control confirm" type="password" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="area">Area of Study</label>
+							</div>
+							<div class="col-md-6">
+								<input class="form-control area" type="text" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="number">Phone number</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control number" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="number">Email</label>
+							</div>
+							<div class="col-md-6">
+								<input type="text" class="form-control email" />
+							</div>
+						</div>
+						<div class="row">
+							<div class="col-md-6">
+								<label for="degree">Degree of study</label>
+							</div>
+							<div class="col-md-6">
+								<select class="degree">
+									<option value="none">Please Select:</option>
+									<option value="HS">High school</option>
+									<option value="UG">Undergraduate</option>
+									<option value="GR">Graduate Degree</option>	
+									<option value="PD">PhD</option>
+								</select>
+							</div>
+						</div>
+						<div class="text-right control-btn">
+							<a id="register" class="btn btn-default">Register</a>
+						</div>
+					</form>
+				</div>
+				<div class="errormsg container"></div>
+			</div>
+		</div>
+
+	</body>
+	<script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+	<script src="http://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.js"></script>
+	<script src="http://cdn.jsdelivr.net/jquery.validation/1.14.0/jquery.validate.min.js"></script>
+	<script src="js/script.js"></script>
+</html>
