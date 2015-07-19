@@ -21,8 +21,8 @@ function geolocateUser(map) {
     navigator.geolocation.getCurrentPosition(function(position) {
       // send a POST request to server
       $.ajax({
-        type: "POST",
-        url: "http://localhost:8000/api/v1/study_group/",
+        type: 'POST',
+        url: 'http://localhost:8000/api/v1/study_group/',
         data: {'type': 'set_gis', 'longitude': position.coords.longitude,
                'latitude': position.coords.latitude},
         params: {'oauth_consumer_key': 'abcd'},         // oauth consumer key has filler
@@ -131,11 +131,13 @@ for (var i = 0; i < 100; i++) {
   var usrObj = {
     realname: name,
     username: usrname,
-    position: {lat: (2 * Math.random() - 1) * 90, lng: (2 * Math.random() - 1) * 180}
+    position: {
+      lat: (2 * Math.random() - 1) * 90,
+      lng: (2 * Math.random() - 1) * 180
+    }
   }
   users.push(usrObj);
 }
 // --- UNTIL HERE !!!!!!!----
-
 
 google.maps.event.addDomListener(window, 'load', function() {initialize(users);});
