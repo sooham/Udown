@@ -1,6 +1,6 @@
 1. Create signup and sign in system - Frank  Stage 1: Done 
 2. Integrate payment system with braintree - James Stage 1: Done
-3. Google Maps Display location, find people around them who are currently using the app, update location on login - Sooham 
+3. Google Maps Display location, find people around them who are currently using the app, update location on login - Sooham : Done
 4. Invite people by selecting users and creating study groups - Sooham
 5. (Part of 4) create/edit start and end times. - Sooham
 6. Notify when the event will start - through the app - Shrey 
