@@ -96,6 +96,22 @@ class UserResource(ModelResource):
 			else:
 				BadRequest('set user gis info error')
 
+		elif create_type == 'notify':
+			if(my_user):
+				recipient = MyUser.objects.get(bundle.data.pop("recipient"))
+				verb = bundle.data.pop("verb")
+				notify.send(my_user, recipient=recipient, verb=verb)
+
+		elif create_type == 'get_groups':
+			if(user!=None):
+				all_groups = set()
+				for m in Membership.objects.filter(person = user):
+					all_groups.add(m.group)
+
+				raise ImmediateHttpResponse(http.HttpAccepted(str(list(all_groups))))
+			else:
+				raise BadRequest('get user group error')
+
 		else:
 			raise BadRequest('create user resource error')
 

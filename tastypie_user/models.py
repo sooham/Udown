@@ -14,13 +14,11 @@ class MyUser(User):
 
 	longitude = models.FloatField(default = 0)
 	latitude = models.FloatField(default = 0)
-
+	number = models.CharField(max_length = 15)
 	area_of_study = models.CharField(max_length=100)
-
 	degree = models.CharField(max_length=2,
 		choices=DEGREE_CHOICES,
 		default='HS')
-	pass
 
 class TutorUser(MyUser):
 	pass
