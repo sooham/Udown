@@ -3,7 +3,7 @@ import requests, json
 url = 'http://ec2-52-24-227-252.us-west-2.compute.amazonaws.com/api/v1/user/'
 
 client_id = 'hp9FrnfZs10cqwaYyBNSSNtvYuTsR7LZ3oRC1e7s'
-client_secret = '4x6RJVdPzHWV6SPcCelXIijsnFBWfmRMXcW6i63q3eQ6rJuzoVGJOvt82Zb5LYran217XOKlMaW8TVRXe68n1tc7wYwS0uFsrq8mGjuVJig8ePKRUDseUz2FS7KnpXf4'
+client_secret = 'secret'
 
 def signup(name, email, password):
 	headers = {'content-type': 'application/json'}
