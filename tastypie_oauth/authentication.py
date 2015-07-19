@@ -4,8 +4,7 @@ from django.conf import settings
 from django.contrib.auth.models import AnonymousUser
 from django.utils import timezone
 from tastypie.authentication import Authentication
-
-
+from oauth2_provider import oauth2_validators
 """
 This is a simple OAuth 2.0 authentication model for tastypie
 
@@ -50,7 +49,7 @@ class OAuth20Authentication(Authentication):
                 if auth_header_value:
                     key = auth_header_value.split(' ')[1]
             if not key:
-                log.info('OAuth20Authentication. No consumer_key found.')
+                log.info('OAuth20Authenticationself. No consumer_key found.')
                 return None
             """
             If verify_access_token() does not pass, it will raise an error
@@ -74,26 +73,26 @@ class OAuth20Authentication(Authentication):
             return False
 
 
-def verify_access_token(key):
-    # Import the AccessToken model
-    try:
-        model = settings.OAUTH_ACCESS_TOKEN_MODEL
-        model_parts = model.split('.')
-        module_path = '.'.join(model_parts[:-1])
-        module = __import__(module_path, globals(), locals(), ['AccessToken'])
-        AccessToken = getattr(module, model_parts[-1])
-    except:
-        raise OAuthError("Error importing AccessToken model: %s" % model)
+# def verify_access_token(key):
+#     # Import the AccessToken model
+#     try:
+#         model = oauth2_provider.models.AccessToken
+#         model_parts = model.split('.')
+#         module_path = '.'.join(model_parts[:-1])
+#         module = __import__(module_path, globals(), locals(), ['AccessToken'])
+#         AccessToken = getattr(module, model_parts[-1])
+#     except:
+#         raise OAuthError("Error importing AccessToken model")
 
-    # Check if key is in AccessToken key
-    try:
-        token = AccessToken.objects.get(token=key)
+#     # Check if key is in AccessToken key
+#     try:
+#         token = AccessToken.objects.get(token=key)
 
-        # Check if token has expired
-        if token.expires < timezone.now():
-            raise OAuthError('AccessToken has expired.')
-    except AccessToken.DoesNotExist:
-        raise OAuthError("AccessToken not found at all.")
+#         # Check if token has expired
+#         if token.expires < timezone.now():
+#             raise OAuthError('AccessToken has expired.')
+#     except AccessToken.DoesNotExist:
+#         raise OAuthError("AccessToken not found at all.")
 
-    log.info('Valid access')
-    return token
+#     log.info('Valid access')
+#     return token

@@ -10,6 +10,11 @@ from django.conf import settings
 from django.http import HttpResponse
 from tastypie import http
 
+from tastypie_oauth.authentication import OAuth20Authentication
+from tastypie.authorization import DjangoAuthorization
+
+from study_group.models import Membership
+
 class UserResource(ModelResource):
 
 	def show_keys(self, request):
@@ -76,15 +81,13 @@ class UserResource(ModelResource):
 		else:
 			raise BadRequest('create user resource error')
 
-
 	def get_detail(self, request=None, **kwargs):
 		if kwargs.get('pk') == 'keys':
-			self.show_keys(request)
+			self.show_keys(request)	
 		else:
 			return super(UserResource, self).get_detail(request, **kwargs)
 
-
-   	def dehydrate(self, bundle):
+	def dehydrate(self, bundle):
 		bundle.data['email'] = ''
 		bundle.data['password'] = ''
 		return bundle
@@ -92,3 +95,5 @@ class UserResource(ModelResource):
 	class Meta:
 		queryset = User.objects.all()
 		resource_name = 'user'
+		authorization = DjangoAuthorization()
+        authentication = OAuth20Authentication()

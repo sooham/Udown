@@ -2,8 +2,8 @@ import requests, json
 
 url = 'http://localhost:8000/api/v1/user/'
 
-client_id = 'r1oBSwzAR2XB2oJD9dkVufpMJhAyjG8yo52qWDKq'
-client_secret = '73RvpJUjqVFBcMKG7LZRcuVj6T0hDSbzpEUGUAn9E3MHyEfdYz37jvslZfNIrOhPsXkepTlmf1bj9IncYwzIy6qPV8sYQKCnXVubXLHtV5p75552SZGT4umqiPGlmSfu'
+client_id = '7DCvXFjeXT7px5ojxVtWWYp5IJMwFBQqya53tMR8'
+client_secret = 'V3XPbQ8EzQt98ORsLxEAhETQql2yorkYSC9dkrNUSzNNYumq7VQLLCLSw383Zy5v3k8AmMZKhS7g1XSKcirPLMHXPIDkaEKNeLFbvDIwHJ6ClCvmQQ3y49XRcqg6dKTu'
 
 def signup(name, email, password):
 	headers = {'content-type': 'application/json'}
@@ -46,6 +46,23 @@ def get_token(username, password):
 		url="http://localhost:8000/o/token/",
 		data=payload,
 		#headers=headers
+	)
+
+def get_user_groups(token):
+	headers = {'content-type': 'application/json'}
+	if token != None:
+		data = {
+			'oauth_consumer_key': token,
+		}
+	else:
+		data = None
+	return requests.post(
+		url="http://localhost:8000/api/v1/study_group/",
+		headers=headers,
+		params=data,
+		data=json.dumps({
+				'type': "get_user_groups",
+			})
 	)
 
 def create_group(token):
