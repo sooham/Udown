@@ -4,12 +4,18 @@ from django.contrib.auth.models import User
 from django.db import models
 
 class MyUser(User):
+
 	DEGREE_CHOICES = (
 		('HS', 'highschool'),
 		('UG', 'undergrad'),
 		('GR', 'grad'),
 		('PD', 'PhD'),
 	)
+
+	longitude = models.FloatField(default = 0)
+	latitude = models.FloatField(default = 0)
+
+	area_of_study = models.CharField(max_length=100)
 
 	degree = models.CharField(max_length=2,
 		choices=DEGREE_CHOICES,

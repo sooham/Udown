@@ -2,8 +2,8 @@ import requests, json
 
 url = 'http://localhost:8000/api/v1/user/'
 
-client_id = '7DCvXFjeXT7px5ojxVtWWYp5IJMwFBQqya53tMR8'
-client_secret = 'V3XPbQ8EzQt98ORsLxEAhETQql2yorkYSC9dkrNUSzNNYumq7VQLLCLSw383Zy5v3k8AmMZKhS7g1XSKcirPLMHXPIDkaEKNeLFbvDIwHJ6ClCvmQQ3y49XRcqg6dKTu'
+client_id = 'CRqcfTOooDan8UHBnS4AZjOFGURIo1IU1DNbcmMV'
+client_secret = 'Lw5O71uq6fNDAL9lqHZQokCNWlvVfAWs1LDZWVAwRq9kBjKX38Yv0Fg7XSReZqhop9VDA1HcvnFFOWqUBoABGToJgau9C6frBnXbkm22nyCNJ7ekSGZcRxuG0NODaV1K'
 
 def signup(name, email, password):
 	headers = {'content-type': 'application/json'}
@@ -80,6 +80,25 @@ def create_group(token):
 		data=json.dumps({
 				'type': "create",
 				'description': "LOL",
+			})
+	)
+
+def set_gis(token, longitude, latitude):
+	headers = {'content-type': 'application/json'}
+	if token != None:
+		data = {
+			'oauth_consumer_key': token,
+		}
+	else:
+		data = None
+	return requests.post(
+		url="http://localhost:8000/api/v1/user/",
+		headers=headers,
+		params=data,
+		data=json.dumps({
+				'type': "set_gis",
+				'longitude': longitude,
+				'latitude': latitude,
 			})
 	)
 

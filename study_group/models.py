@@ -17,7 +17,10 @@ from oauth2_provider import oauth2_validators
 
 class StudyGroup(models.Model):
 	users = models.ManyToManyField(User, through='Membership')
-	description = models.CharField(max_length = 140)
+	description = models.CharField(max_length=140)
+	title = models.CharField(max_length=50)
+	subject = models.CharField(max_length=50)
+	address = models.CharField(max_length=200)
 
 class Membership(models.Model):
     person = models.ForeignKey(User)
@@ -61,11 +64,9 @@ class StudyGroupResource(ModelResource):
 			else:
 				raise BadRequest('get user group error')
 
-
 	def add_user_to_group(self, user, group):
 		m = Membership(person = user, group = group)
 		m.save()
-
 
 	class Meta:
 		queryset = StudyGroup.objects.all()
