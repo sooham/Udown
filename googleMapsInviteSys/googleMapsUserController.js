@@ -1,6 +1,6 @@
 /*
  * This script contains all functions needed to parse an array of User objects,
- * a JS  object literal with
+ * which is a JS object literal with
  * {username: string, realname: string, location: {lat: number, lng: number}}
  */
 
@@ -102,14 +102,16 @@ function initialize(userArray) {
 }
 
 var currentInfoWindow = null;
+var users = [];
+// To use, add UserObjects to the users array above this line,
+// then everything else will work itself
 
-// ---- generate some random users to test ----
+// --- REMOVE BEFORE USING THIS FILE!!!!!!!!!----
 var names = ['bill gates', 'steve jobs', 'mark zuckerberg', 'drew houston',
             'satya nadella', 'bob jones'];
 var usernames = ['haxx0r', 'noob', 'deathshot', 'captain', 'morganstanley',
 '1337', 'thelord', 'urmom'];
 
-var users = [];
 for (var i = 0; i < 100; i++) {
   var name = names[Math.floor(Math.random() * names.length)];
   var usrname = usernames[Math.floor(Math.random() * usernames.length)];
@@ -120,5 +122,7 @@ for (var i = 0; i < 100; i++) {
   }
   users.push(usrObj);
 }
+// --- UNTIL HERE !!!!!!!----
+
 
 google.maps.event.addDomListener(window, 'load', function() {initialize(users);});
