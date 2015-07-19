@@ -54,7 +54,7 @@ function addMarker(map, user) {
     });
     // add info window
     var infowindow = new google.maps.InfoWindow({
-      content: 'hello'
+      content: user.realname
     });
 
     // add click listener
@@ -86,13 +86,14 @@ function initialize(userArray) {
 
 }
 
-var name = ['bill gates', 'steve jobs', 'mark zuckerberg', 'drew houston',
+var names = ['bill gates', 'steve jobs', 'mark zuckerberg', 'drew houston',
             'satya nadella', 'bob jones'];
 
 var users = [];
 for (var i = 0; i < 100; i++) {
+  var name = names[Math.floor(Math.random() * names.length)];
   var usrObj = {
-    realname: name[Math.random() * name.length],
+    realname: name,
     position: {lat: (2 * Math.random() - 1) * 90, lng: (2 * Math.random() - 1) * 180},
     username: 'haxx0r'
   }
