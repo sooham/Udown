@@ -20,7 +20,10 @@ class StudyGroup(models.Model):
 	subject = models.CharField(max_length = 80)
 	ta = models.CharField(max_length = 90)
 	users = models.ManyToManyField(User, through='Membership')
-	description = models.CharField(max_length = 140)
+	description = models.CharField(max_length=140)
+	title = models.CharField(max_length=50)
+	subject = models.CharField(max_length=50)
+	address = models.CharField(max_length=200)
 
 class Membership(models.Model):
     person = models.ForeignKey(User)
@@ -31,6 +34,7 @@ class Membership(models.Model):
 from tastypie.resources import ModelResource
 from tastypie import fields, http
 import json
+from tastypie_user.models import MyUser
 
 class StudyGroupResource(ModelResource):
 
@@ -38,7 +42,7 @@ class StudyGroupResource(ModelResource):
 		request = bundle.request
 		create_type = bundle.data.pop('type')
 		key = request.GET.get('oauth_consumer_key')
-		user = verify_access_token(key).user
+		user = MyUser.objects.get(username=verify_access_token(key).user.username)
 
 		if(create_type == 'create'):
 			new_group = StudyGroup(description = bundle.data.pop('description'))
@@ -53,22 +57,16 @@ class StudyGroupResource(ModelResource):
 				m.delete()
 			group.delete()
 			raise ImmediateHttpResponse(http.HttpAccepted())
-
-		elif create_type == 'get_user_groups':
-			if(user!=None):
-				all_groups = set()
-				for m in Membership.objects.filter(person = user):
-					all_groups.add(m.group)
-
-				raise ImmediateHttpResponse(http.HttpAccepted(str(list(all_groups))))
-			else:
-				raise BadRequest('get user group error')
-
+		elif create_type == "add_to_group":
+			group = StudyGroup.objects.get(id = bundle.data.pop('id'))
+			self.add_user_to_group(user, group)
+		elif create_type == "quit_group":
+			group = StudyGroup.objects.get(id = bundle.data.pop('id'))
+			m = Membership.objects.get(person=user, group=group)
 
 	def add_user_to_group(self, user, group):
 		m = Membership(person = user, group = group)
 		m.save()
-
 
 	class Meta:
 		queryset = StudyGroup.objects.all()

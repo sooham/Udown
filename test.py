@@ -2,8 +2,8 @@ import requests, json
 
 url = 'http://localhost:8000/api/v1/user/'
 
-client_id = '7DCvXFjeXT7px5ojxVtWWYp5IJMwFBQqya53tMR8'
-client_secret = 'V3XPbQ8EzQt98ORsLxEAhETQql2yorkYSC9dkrNUSzNNYumq7VQLLCLSw383Zy5v3k8AmMZKhS7g1XSKcirPLMHXPIDkaEKNeLFbvDIwHJ6ClCvmQQ3y49XRcqg6dKTu'
+client_id = 'KnFuX8NUWSupmktwLogNPKxCXScCXAMVhTOw9Nh9'
+client_secret = 'SMLGxyR6GzLsaccIiS8DMeA3fWFkB4f6am6Oce0LKcPnIoUW54zSzFwS7U5UWn3Q7MOYHsNnVzVe0PyzpR8Fb4vJNUdWwj3t1LveCARcJEPl8mN9BpyRKPT8qgBlLSMU'
 
 def signup(name, email, password):
 	headers = {'content-type': 'application/json'}
@@ -57,11 +57,11 @@ def get_user_groups(token):
 	else:
 		data = None
 	return requests.post(
-		url="http://localhost:8000/api/v1/study_group/",
+		url="http://localhost:8000/api/v1/user/",
 		headers=headers,
 		params=data,
 		data=json.dumps({
-				'type': "get_user_groups",
+				'type': "get_groups",
 			})
 	)
 
@@ -83,6 +83,43 @@ def create_group(token):
 			})
 	)
 
+def quit_group(token, id):
+	headers = {'content-type': 'application/json'}
+	if token != None:
+		data = {
+			'oauth_consumer_key': token,
+		}
+	else:
+		data = None
+	return requests.post(
+		url="http://localhost:8000/api/v1/study_group/",
+		headers=headers,
+		params=data,
+		data=json.dumps({
+				'type': "quit_group",
+				'id': id,
+			})
+	)
+
+def set_gis(token, longitude, latitude):
+	headers = {'content-type': 'application/json'}
+	if token != None:
+		data = {
+			'oauth_consumer_key': token,
+		}
+	else:
+		data = None
+	return requests.post(
+		url="http://localhost:8000/api/v1/user/",
+		headers=headers,
+		params=data,
+		data=json.dumps({
+				'type': "set_gis",
+				'longitude': longitude,
+				'latitude': latitude,
+			})
+	)
+
 def delete_group(token, id):
 	headers = {'content-type': 'application/json'}
 	if token != None:
@@ -100,6 +137,27 @@ def delete_group(token, id):
 				'id': id,
 			})
 	)
+
+def add_to_group(token, id):
+	headers = {'content-type': 'application/json'}
+	if token != None:
+		data = {
+			'oauth_consumer_key': token,
+		}
+	else:
+		data = None
+	return requests.post(
+		url="http://localhost:8000/api/v1/study_group/",
+		headers=headers,
+		params=data,
+		data=json.dumps({
+				'type': "add_to_group",
+				'id': id,
+			})
+	)
+
+def invite_to_group(token, id):
+	pass
 
 t = get_token('a', '1234')
 token = eval(t.content)['access_token']

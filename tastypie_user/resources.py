@@ -13,6 +13,8 @@ from tastypie import http
 from tastypie_oauth.authentication import OAuth20Authentication
 from tastypie.authorization import DjangoAuthorization
 
+from django.utils import timezone
+
 from study_group.models import Membership
 
 class UserResource(ModelResource):
@@ -37,6 +39,11 @@ class UserResource(ModelResource):
 	def obj_create(self, bundle, **kwargs):
 		request = bundle.request
 		create_type = bundle.data.pop('type')
+		try:
+			key = request.GET.get('oauth_consumer_key')
+			my_user = User.objects.get(username = verify_access_token(key).user.username)
+		except OAuthError:
+			my_user = None
 
 		if create_type == 'register':
 
@@ -73,10 +80,37 @@ class UserResource(ModelResource):
 				if expiry_seconds:
 					request.session.set_expiry(int(expiry_seconds))
 				self.show_keys(request)
+
 			elif user is not None and not user.is_active:
 				raise BadRequest('not active')
 			else:
 				raise BadRequest('login error')
+
+		elif create_type == 'set_gis':
+			if my_user:
+
+				my_user.longitude = bundle.data.pop('longitude')
+				my_user.latitude = bundle.data.pop('latitude')
+				my_user.save()
+				raise ImmediateHttpResponse(http.HttpAccepted(my_user.longitude))
+			else:
+				BadRequest('set user gis info error')
+
+		elif create_type == 'notify':
+			if(my_user):
+				recipient = MyUser.objects.get(bundle.data.pop("recipient"))
+				verb = bundle.data.pop("verb")
+				notify.send(my_user, recipient=recipient, verb=verb)
+
+		elif create_type == 'get_groups':
+			if(user!=None):
+				all_groups = set()
+				for m in Membership.objects.filter(person = user):
+					all_groups.add(m.group)
+
+				raise ImmediateHttpResponse(http.HttpAccepted(str(list(all_groups))))
+			else:
+				raise BadRequest('get user group error')
 
 		else:
 			raise BadRequest('create user resource error')
@@ -87,18 +121,8 @@ class UserResource(ModelResource):
 		else:
 			return super(UserResource, self).get_detail(request, **kwargs)
 
-<<<<<<< HEAD
 	def dehydrate(self, bundle):
-=======
-	def push_notification(self, notification):
-		request = bundle.request
-		to = bundle.data.get('to_username')
-		to_user = MyUser.objects.get(username=to)
-		user = request.user
-		notify.send(user, recipient=, verb=notification)
-   	
-   	def dehydrate(self, bundle):
->>>>>>> babe0a9a31dbd7e12b0178f97b4fb6b1582981b7
+
 		bundle.data['email'] = ''
 		bundle.data['password'] = ''
 		return bundle
@@ -108,3 +132,33 @@ class UserResource(ModelResource):
 		resource_name = 'user'
 		authorization = DjangoAuthorization()
         authentication = OAuth20Authentication()
+
+from oauth2_provider.models import AccessToken
+
+class OAuthError(RuntimeError):
+    """Generic exception class."""
+    def __init__(self, message='OAuth error occured.'):
+        self.message = message
+
+def verify_access_token(key):
+    # Import the AccessToken model
+    # try:
+    # model = AccessToken
+    # model_parts = str(model).split('.')
+    # module_path = '.'.join(model_parts[:-1])
+    # module = __import__(module_path, globals(), locals(), ['AccessToken'])
+    # AccessToken = getattr(module, model_parts[-1])
+    # except:
+    #     raise OAuthError("Error importing AccessToken model")
+
+    # Check if key is in AccessToken key
+    try:
+        token = AccessToken.objects.get(token=key)
+
+        # Check if token has expired
+        if token.expires < timezone.now():
+            raise OAuthError('AccessToken has expired.')
+    except AccessToken.DoesNotExist:
+        raise OAuthError("AccessToken not found at all.")
+
+    return token
