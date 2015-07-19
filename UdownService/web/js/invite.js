@@ -48,9 +48,9 @@ function addMarker(map, user) {
    */
   setTimeout(function() {
     // add marker for user
-    if (user.position == {lat: 0, lng: 0}) {
-      return;
-    }
+    // if (user.position == {lat: 0, lng: 0}) {
+    //   return;
+    // }
     var marker = new google.maps.Marker({
       title: user.realname,
       map: map,
