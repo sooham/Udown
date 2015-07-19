@@ -7,18 +7,26 @@ $(function(){
 		var confirm = $("#register-form .confirm").val();
 		var email = $("#register-form .email").val();
 
-
-		$.post("http://localhost:8123/api/v1/user/",
-		{
-			'type': 'register',
-			'username': user,
-			'email': email,
-			'password1': pass,
-			'password2': confirm
-		},
-		function(data, status){
-			console.log(data);
+		$.ajax({
+		   url: "http://localhost:8000/api/v1/user/",
+		   type: "POST",
+		   contentType: "application/json",
+			dataType:'json',
+		   data: JSON.stringify({
+				'type': 'register',
+				'username': "bb",
+				'email': '',
+				'password1': '1234',
+				'password2': '1234'
+			}),
+			success: function (msg) {
+				console.log(msg)
+			}, 
+			error: function (msg) {
+				console.log(msg)
+			}
 		});
+		
 	/*
 		//empty error messages
 		$("#register-form .errormsg").empty();

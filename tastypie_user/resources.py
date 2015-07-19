@@ -39,6 +39,7 @@ class UserResource(ModelResource):
 	def obj_create(self, bundle, **kwargs):
 		request = bundle.request
 		create_type = bundle.data.pop('type')
+		print("fuck")
 		try:
 			key = request.GET.get('oauth_consumer_key')
 			my_user = User.objects.get(username = verify_access_token(key).user.username)
