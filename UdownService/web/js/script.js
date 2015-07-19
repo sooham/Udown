@@ -1,4 +1,10 @@
 $(function(){
+	//location picking
+	$("a#pick").click(function(){
+		$(this).parent().children("div.pick.msg").html('Now click on the map to mark your location!');
+		sessionStorage.pick = true;
+	});
+
 	var regex;
 	$("#register").click(function(){
 		//global vars
@@ -14,10 +20,10 @@ $(function(){
 			dataType:'json',
 		   data: JSON.stringify({
 				'type': 'register',
-				'username': "bb",
-				'email': '',
-				'password1': '1234',
-				'password2': '1234'
+				'username': user,
+				'email': email,
+				'password1': pass,
+				'password2': confirm
 			}),
 			success: function (msg) {
 				console.log(msg)
@@ -115,13 +121,27 @@ $(function(){
 	});
 
 	$("#login").click(function(){
-	$.post("demo_test_post.asp",
-	{
-		username: user,
-		password: pass
-	},
-	function(data, status){
-		console.log(data);
+	var signinuser = $("#login-form .username").val();
+	var signinpass = $("#login-form .password").val();
+	
+	$.ajax({
+		url: "http://localhost:8000/api/v1/user/",
+		type: "POST",
+		contentType: "application/json",
+		dataType:'json',
+		data: JSON.stringify({
+			'type': 'login',
+			'username': signinuser,
+			'password': signinpass
+		}),
+		success: function (msg) {
+			//save to html5 session storage
+			sessionStorage.session = msg;
+			console.log(sessionStorage.session);
+		}, 
+		error: function (msg) {
+			console.log(msg);
+		}
 	});
 
 		/*

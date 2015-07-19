@@ -6,7 +6,7 @@
 		<!-- Optional theme -->
 		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 		
-		<link rel="stylesheet" href="../web/css/style.css">
+		<link rel="stylesheet" href="css/style.css">
 		
 	</head>
 	<body>
@@ -36,7 +36,7 @@
 		    <li class="dropdown">
 		      <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My account <span class="caret"></span></a>
 		      <ul class="dropdown-menu">
-			<li><a href="../accounts/view">My profile</a></li>
+			<li><a href="accounts/view">My profile</a></li>
 			  <li><a href="#">Edit profile</a></li>
 			  <li><a href="#">Edit credit card information </a></li>
 		    </ul>
@@ -47,72 +47,24 @@
 		</div><!-- /.container-fluid -->
 		</nav>
 		<div class="container">
-			<h1 class="text-center">Find study buddies here!</h1>
 			<div class="row">
-				<div class="col-md-6 col-sm-6">
-					<!-- loads map here -->
-					<iframe style="border: 0" src="map" width="100%" height="77%"></iframe>
-				</div>
-				<div class="col-md-6 col-sm-6">
-					<div id="add-people">
-						<h3 class="text-center">Create a Study group</h3>
-						<form id="create-group">
-							<div class="row">
-								<div class="col-md-6">
-									<label for="name">Name</label>
-								</div>
-								<div class="col-md-6">
-									<input type="text" id="create-group" class="form-control" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label for="create-group">Participants</label>
-								</div>
-								<div class="col-md-6">
-									<p>Find your study budy username and add it below in this format "username1, username2, username3"</p>
-									<a href="#" class="btn btn-default">Add studybuddies</a><br>
-									<div class="buddymsg"></div>
-									<textarea class="form-control" width="100%" height="30%"></textarea>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label for="subject">Subject</label>
-								</div>
-								<div class="col-md-6">
-									<input type="text" id="subject" class="form-control" />
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label for="hire">Hire a TA?</label>
-								</div>
-								<div class="col-md-6">
-									<a href="/find/tutor" class="btn btn-default">Hire</a><br>
-									<div class="hiremsg"></div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-6">
-									<label for="hire">Pick location!</label>
-								</div>
-								<div class="col-md-6">
-									<a href="#" class="btn btn-default" id="pick">Pick your location</a><br>
-									<div class="pick msg"></div>
-								</div>
-							</div>
-							<div class="row">
-								<div class="col-md-12">
-									<a href="/create/study-group" class="btn btn-default" id="create">Create</a>
-								</div>
-							</div>
-						</form>
+				<h1 class="text-center" style="padding-bottom: 30px;">Waddap Tom Cruise!</h1>
+				<div class="col-md-6">
+					<h3>University: University of Toronto</h3>
+					<h3>Area of Study: Saving the world</h3>
+					<h3>Degree: High School Diploma</h3>
+					<a href="#" class="btn btn-default">Edit</a>
+					<div class="groups">
+						<h2>My groups</h2>
+						<h4>BattleHack (now in session)</h4>
+						<h4>Acting (two days ago)</h4> 
 					</div>
+				</div>
+				<div class="col-md-6">
+					<img src="http://cdn.trendhunterstatic.com/thumbs/fat-tom-cruise-tropic-thunder-trailer.jpeg" height="55%"/>
 				</div>
 			</div>
 		</div>
-
 	</body>
 	<script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>

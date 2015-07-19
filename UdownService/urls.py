@@ -1,7 +1,7 @@
 from django.conf.urls import patterns, include, url
 from django.contrib import admin
 from tastypie.api import Api
-from views import index
+from views import index, find, mapme, payment, alert, info, create_study, view_profile
 from django.contrib.auth.views import login, logout
 from tastypie_user.resources import UserResource
 from study_group.models import StudyGroupResource
@@ -17,6 +17,14 @@ urlpatterns = patterns('',
     # url(r'^$', 'UdownService.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),    
     url(r'^$', index),
+    url(r'^accounts/login/$', login),
+    url(r'^find/$', find),
+    url(r'^find/map$', mapme),
+    url(r'^find/hire$', payment),
+    url(r'^find/alert$', alert),
+    url(r'^find/tutor$', info),
+    url(r'^create/group$', create_study),
+    url(r'^accounts/view$', view_profile),
     # (r'^accounts/login/$', login),
     # (r'^accounts/logout/$', logout),
     # (r'^accounts/profile/$', profile),
