@@ -66,8 +66,10 @@
 		<!-- <iframe src="/accounts/login/" width="500px" height="500px"></iframe> -->
 
 		<h1>Register</h1>
-		<!-- <iframe src="/accounts/register/" width="500px" height="500px"></iframe> -->
-		{% include "registration/register.html" %}
+		<form action="" method="post"> {% csrf_token %}
+			{{ form.as_p }}
+			<input type="submit" value="Create the account">
+		</form>
 	</div>
 
 	</body>

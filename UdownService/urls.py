@@ -22,7 +22,7 @@ urlpatterns = patterns('',
     (r'^accounts/profile/$', profile),
     (r'^accounts/register/$', register),
 
-    (r'', home),
+    url(r'^o/', include('oauth2_provider.urls', namespace='oauth2_provider')),
 
     #(r'^inbox/notifications/', include(notifications.urls)),
     (r'^api/', include(v1_api.urls)),

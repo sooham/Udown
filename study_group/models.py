@@ -1,5 +1,8 @@
 from django.db import models
+from tastypie_oauth.authentication import OAuth20Authentication
+from tastypie.authorization import DjangoAuthorization
 from tastypie_user.models import MyUser as User
+from tastypie.exceptions import ImmediateHttpResponse, BadRequest
 # Create your models here.
 
 class StudyGroup(models.Model):
@@ -21,19 +24,26 @@ class StudyGroupResource(ModelResource):
 	def obj_create(self, bundle, request=None, **kwargs):
 		request = bundle.request
 		create_type = bundle.data.pop('type')
-		# if create_type == 'upload':
-		# 	user_id = bundle.data.pop('user')
-		# 	user = Subject.objects.get(id=user_id)
+		if(create_type == 'create'):
+			new_group = StudyGroup(description = bundle.data.pop('description'))
+			new_group.save()
+			add_user_to_group(request.user, new_group)
+			raise ImmediateHttpResponse(http.HttpAccepted())
 
-		# 	glucose = bundle.data.pop('glucose')
-		# 	diet = bundle.data.pop('diet')
-		# 	exercise = bundle.data.pop('exercise')
-			
-		# 	upload_data = DailyData(user=user, glucose=glucose, diet=diet, exercise=exercise)
-		# 	upload_data.save()
-		# 	raise ImmediateHttpResponse(http.HttpAccepted())
-                
+		elif(create_type == 'delete'):
+			group = StudyGroup.objects.get(id = bundle.data.pop('id'))
+			for m in Membership.objects.filter(group = group):
+				m.delete()
+			group.delete()
+			raise ImmediateHttpResponse(http.HttpAccepted())
+
+	def add_user_to_group(user, group):
+		m = Membership(person = user, group = group)
+		m.save()
+
 
 	class Meta:
 		queryset = StudyGroup.objects.all()
 		resource_name = 'study_group'
+        authorization = DjangoAuthorization()
+        authentication = OAuth20Authentication()
